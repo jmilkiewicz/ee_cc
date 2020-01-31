@@ -28,4 +28,10 @@ public class AddMultipleTimesSameProductToShoppingCartTest {
                 shoppingCart.contains(overallDoveSoapQuantity, doveSoap), Matchers.is(true));
     }
 
+    //To reviewer: this test was not created in the TDD way and was only added as safety net
+    @Test
+    public void shallReturnTotalPriceAfterAllAdditions() {
+        assertThat(shoppingCart.getTotalPrice(), Matchers.is(new BigDecimal("319.92")));
+    }
+
 }
