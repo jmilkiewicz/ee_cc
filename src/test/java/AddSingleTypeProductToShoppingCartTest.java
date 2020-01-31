@@ -38,4 +38,9 @@ public class AddSingleTypeProductToShoppingCartTest {
         assertThat("not expected to have " + doveSoapQuantity + " times" + doveSoapOnBargain, shoppingCart.contains(doveSoapQuantity, doveSoapOnBargain), Matchers.is(false));
     }
 
+    @Test
+    public void shallReturnTotalPrice() {
+        assertThat(shoppingCart.getTotalPrice(), Matchers.is(new BigDecimal("199.95")));
+    }
+
 }
