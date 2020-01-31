@@ -40,7 +40,7 @@ public class AddSingleTypeProductToShoppingCartTest {
 
     @Test
     public void shallReturnTotalPrice() {
-        assertThat(shoppingCart.getTotalPrice(), Matchers.is(new BigDecimal("1992.95")));
+        assertThat(shoppingCart.getTotalPrice(), Matchers.is(new BigDecimal("199.95")));
     }
 
 }
