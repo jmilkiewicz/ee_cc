@@ -24,6 +24,9 @@ public class ShoppingCart {
 
     //TODO check for nulls
     public ShoppingCart add(int quantity, Product product) {
+        if (quantity == 0) {
+            return this;
+        }
         Integer currentQuantity = this.content.getOrDefault(product, 0);
         Map<Product, Integer> newContent = new HashMap<>(this.content);
         newContent.put(product, currentQuantity + quantity);
@@ -32,8 +35,8 @@ public class ShoppingCart {
     }
 
     public boolean contains(int quantity, Product product) {
-        Integer integer = this.content.get(product);
-        return quantity == integer;
+        Integer currentQuantity = this.content.get(product);
+        return currentQuantity != null && currentQuantity.equals(quantity);
     }
 
     public BigDecimal getTotalPrice() {
