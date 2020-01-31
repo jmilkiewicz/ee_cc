@@ -23,6 +23,7 @@ public class ShoppingCart {
     }
 
     //TODO check for nulls
+    //TODO what shall we do when quantity is negative ? 
     public ShoppingCart add(int quantity, Product product) {
         if (quantity == 0) {
             return this;
