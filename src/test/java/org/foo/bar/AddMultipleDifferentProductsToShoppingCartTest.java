@@ -1,0 +1,29 @@
+package org.foo.bar;
+
+import org.hamcrest.Matchers;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static org.foo.bar.TestFixtures.AxeDeo;
+import static org.foo.bar.TestFixtures.DoveSoap;
+import static org.hamcrest.MatcherAssert.assertThat;
+
+@DisplayName("On adding different products to shopping cart")
+public class AddMultipleDifferentProductsToShoppingCartTest {
+
+    @Test
+    public void shouldContainAllAddedProducts() {
+        ShoppingCart shoppingCart = ShoppingCart.empty().add(2, TestFixtures.DoveSoap).add(2, TestFixtures.AxeDeo);
+
+        assertThat("expected " + 2 + " times" + DoveSoap,
+                shoppingCart.contains(2, DoveSoap), Matchers.is(true));
+
+        assertThat("expected " + 2 + " times" + AxeDeo,
+                shoppingCart.contains(2, DoveSoap), Matchers.is(true));
+
+
+
+    }
+
+
+}
