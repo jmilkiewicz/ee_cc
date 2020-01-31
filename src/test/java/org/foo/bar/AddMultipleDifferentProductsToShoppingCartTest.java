@@ -35,11 +35,11 @@ public class AddMultipleDifferentProductsToShoppingCartTest {
 
     @Test
     public void shouldCalculateTotalSalesTaxWhenDefined() {
-        ShoppingCart shoppingCart = ShoppingCart.empty().add(2, TestFixtures.DoveSoap).add(2, TestFixtures.AxeDeo)
-                .withTaxRate(new BigDecimal("12.5"));
+        ShoppingCart shoppingCart = ShoppingCart.empty().add(2, TestFixtures.DoveSoap)
+                .withTaxRate(new BigDecimal("10"));
 
         assertThat(
-                shoppingCart.getTotalSalesTax(), Matchers.is(new BigDecimal("35.00")));
+                shoppingCart.getTotalSalesTax(), Matchers.is(new BigDecimal("8.00")));
     }
 
 }

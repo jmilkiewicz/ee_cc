@@ -4,22 +4,25 @@ import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class ShoppingCart {
     private final int quantity;
     private final Product product;
+    private final Optional<BigDecimal> taxRate;
 
     private final Map<Product, Integer> content;
 
 
-    private ShoppingCart(int quantity, Product product, Map<Product, Integer> content) {
+    private ShoppingCart(int quantity, Product product, Map<Product, Integer> content, Optional<BigDecimal> taxRate) {
         this.quantity = quantity;
         this.product = product;
         this.content = content;
+        this.taxRate = taxRate;
     }
 
     public static ShoppingCart empty() {
-        return new ShoppingCart(0, null, Collections.emptyMap());
+        return new ShoppingCart(0, null, Collections.emptyMap(), Optional.empty());
     }
 
     //TODO check for nulls
@@ -32,7 +35,7 @@ public class ShoppingCart {
         Map<Product, Integer> newContent = new HashMap<>(this.content);
         newContent.put(product, currentQuantity + quantity);
 
-        return new ShoppingCart(quantity + this.quantity, product, newContent);
+        return new ShoppingCart(quantity + this.quantity, product, newContent, this.taxRate);
     }
 
     public boolean contains(int quantity, Product product) {
@@ -44,11 +47,13 @@ public class ShoppingCart {
         return BigDecimal.valueOf(quantity).multiply(product.getUnitPrice());
     }
 
-    public ShoppingCart withTaxRate(BigDecimal bigDecimal) {
-        return this;
+    //TODO Shall we validate it is in particular range
+    public ShoppingCart withTaxRate(BigDecimal taxRate) {
+        return new ShoppingCart(this.quantity, this.product, this.content, Optional.ofNullable(taxRate));
     }
 
     public BigDecimal getTotalSalesTax() {
+
         return null;
     }
 }
