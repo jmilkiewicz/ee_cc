@@ -47,7 +47,7 @@ public class AddSingleTypeProductToShoppingCartTest {
     }
 
     @Test
-    public void shouldNotContainProductEvenWhenAddedWithQuantityZero() {
+    public void shouldNotContainProductWhenItWasAddedWithQuantityZero() {
         ShoppingCart shoppingCart = ShoppingCart.empty().add(0, TestFixtures.DoveSoap);
 
         assertThat("not expected to contain" + DoveSoap,
