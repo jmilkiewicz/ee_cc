@@ -32,4 +32,10 @@ public class AddSingleTypeProductToShoppingCartTest {
         assertThat("not expected to have " + moreThanAdded + " times" + doveSoap, shoppingCart.contains(moreThanAdded, doveSoap), Matchers.is(false));
     }
 
+    @Test
+    public void shouldNotContainWhenProductIsDifferentToWhatWasAdded() {
+        Product doveSoapOnBargain = new Product(doveSoap.getName(), doveSoap.getUnitPrice().subtract(BigDecimal.ONE));
+        assertThat("not expected to have " + doveSoapQuantity + " times" + doveSoapOnBargain, shoppingCart.contains(doveSoapQuantity, doveSoapOnBargain), Matchers.is(false));
+    }
+
 }
