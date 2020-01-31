@@ -28,11 +28,14 @@ public class ShoppingCart {
         if (quantity == 0) {
             return this;
         }
+        return new ShoppingCart(buildNewContent(quantity, product), this.taxRate);
+    }
+
+    private Map<Product, Integer> buildNewContent(int quantity, Product product) {
         Integer currentQuantity = this.content.getOrDefault(product, 0);
         Map<Product, Integer> newContent = new HashMap<>(this.content);
         newContent.put(product, currentQuantity + quantity);
-
-        return new ShoppingCart(newContent, this.taxRate);
+        return newContent;
     }
 
     public boolean contains(int quantity, Product product) {
