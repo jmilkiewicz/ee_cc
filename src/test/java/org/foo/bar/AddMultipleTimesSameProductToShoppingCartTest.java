@@ -7,25 +7,25 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
+import static org.foo.bar.TestFixtures.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @DisplayName("On adding multiple times same products to shopping cart")
 public class AddMultipleTimesSameProductToShoppingCartTest {
-    private final Product doveSoap = new Product("Dove Soap", new BigDecimal("39.99"));
     private final int firstQuantity = 5;
     private final int secondQuantity = 3;
     private ShoppingCart shoppingCart;
 
     @BeforeEach
     void setUp() {
-        shoppingCart = ShoppingCart.empty().add(firstQuantity, doveSoap).add(secondQuantity, doveSoap);
+        shoppingCart = ShoppingCart.empty().add(firstQuantity, DoveSoap).add(secondQuantity, DoveSoap);
     }
 
     @Test
     public void shouldContainExactlyWhatWasAdded() {
         int overallDoveSoapQuantity = firstQuantity + secondQuantity;
-        assertThat("expected " + overallDoveSoapQuantity + " times" + doveSoap,
-                shoppingCart.contains(overallDoveSoapQuantity, doveSoap), Matchers.is(true));
+        assertThat("expected " + overallDoveSoapQuantity + " times" + DoveSoap,
+                shoppingCart.contains(overallDoveSoapQuantity, DoveSoap), Matchers.is(true));
     }
 
     //To reviewer: this test was not created in the TDD way and was only added as safety net
