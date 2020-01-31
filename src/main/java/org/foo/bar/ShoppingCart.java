@@ -23,7 +23,7 @@ public class ShoppingCart {
     }
 
     //TODO check for nulls
-    //TODO what shall we do when quantity is negative ? 
+    //TODO what shall we do when quantity is negative ?
     public ShoppingCart add(int quantity, Product product) {
         if (quantity == 0) {
             return this;
@@ -42,5 +42,13 @@ public class ShoppingCart {
 
     public BigDecimal getTotalPrice() {
         return BigDecimal.valueOf(quantity).multiply(product.getUnitPrice());
+    }
+
+    public ShoppingCart withTaxRate(BigDecimal bigDecimal) {
+        return this;
+    }
+
+    public BigDecimal getTotalSalesTax() {
+        return null;
     }
 }

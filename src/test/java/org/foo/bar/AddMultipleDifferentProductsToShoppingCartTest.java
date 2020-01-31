@@ -4,6 +4,8 @@ import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 import static org.foo.bar.TestFixtures.AxeDeo;
 import static org.foo.bar.TestFixtures.DoveSoap;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -31,5 +33,13 @@ public class AddMultipleDifferentProductsToShoppingCartTest {
                 shoppingCart.contains(0, DoveSoap), Matchers.is(false));
     }
 
+    @Test
+    public void shouldCalculateTotalSalesTaxWhenDefined() {
+        ShoppingCart shoppingCart = ShoppingCart.empty().add(2, TestFixtures.DoveSoap).add(2, TestFixtures.AxeDeo)
+                .withTaxRate(new BigDecimal("12.5"));
+
+        assertThat(
+                shoppingCart.getTotalSalesTax(), Matchers.is(new BigDecimal("35.00")));
+    }
 
 }
