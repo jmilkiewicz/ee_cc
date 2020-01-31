@@ -21,5 +21,13 @@ public class AddSingleTypeProductToShoppingCartTest {
         assertThat("expected " + 5 + " times" + product, shoppingCart.contains(5, product), Matchers.is(true));
     }
 
+    @Test
+    public void shouldNotContainWhenQuantityIsDifferent() {
+        Product product = new Product("Dove Soap", new BigDecimal("39.99"));
+
+        val shoppingCart = ShoppingCart.empty().add(5, product);
+
+        assertThat("not expected to have " + 6 + " times" + product, shoppingCart.contains(6, product), Matchers.is(false));
+    }
 
 }
