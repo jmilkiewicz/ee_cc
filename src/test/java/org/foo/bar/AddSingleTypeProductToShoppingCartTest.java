@@ -35,6 +35,7 @@ public class AddSingleTypeProductToShoppingCartTest {
     @Test
     public void shouldNotContainWhenProductIsDifferentToWhatWasAdded() {
         Product doveSoapOnBargain = new Product(doveSoap.getName(), doveSoap.getUnitPrice().subtract(BigDecimal.ONE));
+        //TODO small duplication with message
         assertThat("not expected to have " + doveSoapQuantity + " times" + doveSoapOnBargain, shoppingCart.contains(doveSoapQuantity, doveSoapOnBargain), Matchers.is(false));
     }
 
