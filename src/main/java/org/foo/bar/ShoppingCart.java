@@ -1,7 +1,6 @@
 package org.foo.bar;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.Collections;
 import java.util.HashMap;
@@ -9,7 +8,6 @@ import java.util.Map;
 import java.util.Optional;
 
 public class ShoppingCart {
-    public static final MathContext mc = new MathContext(3, RoundingMode.HALF_UP);
     private final int quantity;
     private final Product product;
     private final Optional<BigDecimal> taxRate;
@@ -50,14 +48,14 @@ public class ShoppingCart {
         return BigDecimal.valueOf(quantity).multiply(product.getUnitPrice());
     }
 
-    //TODO Shall we validate it is in particular range
+    //TODO Shall we validate it is in particular range and precision
     public ShoppingCart withTaxRate(BigDecimal taxRate) {
-        BigDecimal tax = taxRate.divide(BigDecimal.valueOf(100), mc);
+        BigDecimal tax = taxRate.divide(BigDecimal.valueOf(100));
         return new ShoppingCart(this.quantity, this.product, this.content, Optional.ofNullable(tax));
     }
 
     public BigDecimal getTotalSalesTax() {
         BigDecimal totalPrice = getTotalPrice();
-        return taxRate.map(tr -> tr.multiply(totalPrice, mc)).orElse(BigDecimal.ZERO);
+        return taxRate.map(tr -> tr.multiply(totalPrice).setScale(2, RoundingMode.HALF_UP)).orElse(BigDecimal.ZERO);
     }
 }
