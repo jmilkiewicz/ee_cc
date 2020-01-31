@@ -10,10 +10,16 @@ import java.util.Optional;
 public class ShoppingCart {
     private final Optional<BigDecimal> taxRate;
     private final Map<Product, Integer> content;
-
+    private final BigDecimal itemsValue;
     private ShoppingCart(Map<Product, Integer> content, Optional<BigDecimal> taxRate) {
         this.content = content;
         this.taxRate = taxRate;
+        this.itemsValue = calculateItemsValue(content);
+    }
+
+    private static BigDecimal calculateItemsValue(Map<Product, Integer> content) {
+        return content.entrySet().stream().map(entry -> entry.getKey().getUnitPrice().multiply(BigDecimal.valueOf(entry.getValue())))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
     public static ShoppingCart empty() {
@@ -42,13 +48,9 @@ public class ShoppingCart {
     }
 
     public BigDecimal getTotalPrice() {
-        return itemsValue().add(getTotalSalesTax());
+        return itemsValue.add(getTotalSalesTax());
     }
 
-    private BigDecimal itemsValue() {
-        return this.content.entrySet().stream().map(entry -> entry.getKey().getUnitPrice().multiply(BigDecimal.valueOf(entry.getValue())))
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-    }
 
     //TODO Shall we validate it is in particular range and precision
     public ShoppingCart withTaxRate(BigDecimal taxRate) {
@@ -57,6 +59,6 @@ public class ShoppingCart {
     }
 
     public BigDecimal getTotalSalesTax() {
-        return taxRate.map(tr -> tr.multiply(itemsValue()).setScale(2, RoundingMode.HALF_UP)).orElse(BigDecimal.ZERO);
+        return taxRate.map(tr -> tr.multiply(itemsValue).setScale(2, RoundingMode.HALF_UP)).orElse(BigDecimal.ZERO);
     }
 }
