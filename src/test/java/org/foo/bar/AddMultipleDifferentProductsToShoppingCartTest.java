@@ -20,7 +20,7 @@ public class AddMultipleDifferentProductsToShoppingCartTest {
 
     @BeforeEach
     void setUpShoppingCartWithMultipleTypesOfProducts() {
-        shoppingCart = ShoppingCart.empty()
+        shoppingCart = ShoppingCart.EMPTY
                 .add(doveSoapQuantity, DoveSoap)
                 .add(axeDeoQuantity, AxeDeo)
                 .withTaxRate(new BigDecimal("12.5"));
@@ -50,7 +50,7 @@ public class AddMultipleDifferentProductsToShoppingCartTest {
         //TODO probably makes sense to extract to parametrised test
         @Test
         public void shouldCalculateTotalSalesTax1() {
-            ShoppingCart shoppingCart = ShoppingCart.empty().add(1, TestFixtures.DoveSoap)
+            ShoppingCart shoppingCart = ShoppingCart.EMPTY.add(1, TestFixtures.DoveSoap)
                     .withTaxRate(new BigDecimal("10"));
 
             assertThat(
@@ -61,7 +61,7 @@ public class AddMultipleDifferentProductsToShoppingCartTest {
         public void shouldCalculateTotalSalesTax2() {
             Product product = new Product.ProductBuilder().unitPrice(new BigDecimal(101)).build();
 
-            ShoppingCart shoppingCart = ShoppingCart.empty().add(1, product)
+            ShoppingCart shoppingCart = ShoppingCart.EMPTY.add(1, product)
                     .withTaxRate(new BigDecimal("30"));
 
             assertThat(
@@ -70,7 +70,7 @@ public class AddMultipleDifferentProductsToShoppingCartTest {
 
         @Test
         public void shouldCalculateTotalSalesTax3() {
-            ShoppingCart shoppingCart = ShoppingCart.empty().add(8, DoveSoap)
+            ShoppingCart shoppingCart = ShoppingCart.EMPTY.add(8, DoveSoap)
                     .withTaxRate(new BigDecimal("12.5"));
 
             assertThat(

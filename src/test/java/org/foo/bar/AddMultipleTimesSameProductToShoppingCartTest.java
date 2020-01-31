@@ -18,7 +18,7 @@ public class AddMultipleTimesSameProductToShoppingCartTest {
 
     @BeforeEach
     void setUp() {
-        shoppingCart = ShoppingCart.empty().add(firstQuantity, DoveSoap).add(secondQuantity, DoveSoap);
+        shoppingCart = ShoppingCart.EMPTY.add(firstQuantity, DoveSoap).add(secondQuantity, DoveSoap);
     }
 
     @Test

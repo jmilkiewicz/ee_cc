@@ -8,9 +8,11 @@ import java.util.Map;
 import java.util.Optional;
 
 public class ShoppingCart {
+    public static final ShoppingCart EMPTY = new ShoppingCart(Collections.emptyMap(), Optional.empty());
     private final Optional<BigDecimal> taxRate;
     private final Map<Product, Integer> content;
     private final BigDecimal itemsValue;
+
 
     private ShoppingCart(Map<Product, Integer> content, Optional<BigDecimal> taxRate) {
         this.content = content;
@@ -21,10 +23,6 @@ public class ShoppingCart {
     private static BigDecimal calculateItemsValue(Map<Product, Integer> content) {
         return content.entrySet().stream().map(entry -> entry.getKey().getUnitPrice().multiply(BigDecimal.valueOf(entry.getValue())))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
-    }
-
-    public static ShoppingCart empty() {
-        return new ShoppingCart(Collections.emptyMap(), Optional.empty());
     }
 
     //TODO check for nulls

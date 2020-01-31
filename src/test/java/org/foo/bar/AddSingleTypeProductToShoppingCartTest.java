@@ -17,7 +17,7 @@ public class AddSingleTypeProductToShoppingCartTest {
 
     @BeforeEach
     void setUp() {
-        shoppingCart = ShoppingCart.empty().add(doveSoapQuantity, DoveSoap);
+        shoppingCart = ShoppingCart.EMPTY.add(doveSoapQuantity, DoveSoap);
     }
 
     @Test
@@ -48,7 +48,7 @@ public class AddSingleTypeProductToShoppingCartTest {
 
     @Test
     public void shouldNotContainProductWhenItWasAddedWithQuantityZero() {
-        ShoppingCart shoppingCart = ShoppingCart.empty().add(0, TestFixtures.DoveSoap);
+        ShoppingCart shoppingCart = ShoppingCart.EMPTY.add(0, TestFixtures.DoveSoap);
 
         assertThat("not expected to contain" + DoveSoap,
                 shoppingCart.contains(0, DoveSoap), Matchers.is(false));
