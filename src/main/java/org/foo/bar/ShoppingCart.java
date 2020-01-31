@@ -45,7 +45,12 @@ public class ShoppingCart {
     }
 
     public BigDecimal getTotalPrice() {
-        return BigDecimal.valueOf(quantity).multiply(product.getUnitPrice());
+        return itemsValue().add(getTotalSalesTax());
+    }
+
+    private BigDecimal itemsValue() {
+        return this.content.entrySet().stream().map(entry-> entry.getKey().getUnitPrice().multiply(BigDecimal.valueOf(entry.getValue())))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
     //TODO Shall we validate it is in particular range and precision
@@ -55,7 +60,6 @@ public class ShoppingCart {
     }
 
     public BigDecimal getTotalSalesTax() {
-        BigDecimal totalPrice = getTotalPrice();
-        return taxRate.map(tr -> tr.multiply(totalPrice).setScale(2, RoundingMode.HALF_UP)).orElse(BigDecimal.ZERO);
+        return taxRate.map(tr -> tr.multiply(itemsValue()).setScale(2, RoundingMode.HALF_UP)).orElse(BigDecimal.ZERO);
     }
 }
