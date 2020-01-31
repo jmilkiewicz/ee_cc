@@ -1,5 +1,5 @@
-import org.foo.bar.Product;
-import org.foo.bar.ShoppingCart;
+package org.foo.bar;
+
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -40,7 +40,7 @@ public class AddSingleTypeProductToShoppingCartTest {
 
     @Test
     public void shallReturnTotalPrice() {
-        assertThat(shoppingCart.getTotalPrice(), Matchers.is(new BigDecimal("199.95")));
+        assertThat(shoppingCart.getTotalPrice(), Matchers.is(new BigDecimal("1992.95")));
     }
 
 }
