@@ -61,5 +61,17 @@ public class AddMultipleDifferentProductsToShoppingCartTest {
         }
     }
 
+    @Test
+    public void shallCalculateTotalPriceIncludingTax() {
+        ShoppingCart shoppingCart = ShoppingCart.empty()
+                .add(2, TestFixtures.DoveSoap)
+                .add(2, TestFixtures.AxeDeo)
+                .withTaxRate(new BigDecimal("12.5"));
+
+
+        assertThat(
+                shoppingCart.getTotalPrice(), Matchers.is(new BigDecimal("314.96")));
+    }
+
 
 }
