@@ -9,9 +9,7 @@ import java.util.Optional;
 
 public class ShoppingCart {
     private final Optional<BigDecimal> taxRate;
-
     private final Map<Product, Integer> content;
-
 
     private ShoppingCart(Map<Product, Integer> content, Optional<BigDecimal> taxRate) {
         this.content = content;
