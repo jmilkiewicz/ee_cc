@@ -17,7 +17,7 @@ public class ShoppingCart {
     }
 
     public ShoppingCart add(int quantity, Product product) {
-        return new ShoppingCart(quantity, product);
+        return new ShoppingCart(quantity + this.quantity, product);
     }
 
     public boolean contains(int quantity, Product product) {
