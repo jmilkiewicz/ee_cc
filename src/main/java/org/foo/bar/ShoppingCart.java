@@ -11,6 +11,7 @@ public class ShoppingCart {
     private final Optional<BigDecimal> taxRate;
     private final Map<Product, Integer> content;
     private final BigDecimal itemsValue;
+
     private ShoppingCart(Map<Product, Integer> content, Optional<BigDecimal> taxRate) {
         this.content = content;
         this.taxRate = taxRate;
@@ -50,7 +51,6 @@ public class ShoppingCart {
     public BigDecimal getTotalPrice() {
         return itemsValue.add(getTotalSalesTax());
     }
-
 
     //TODO Shall we validate it is in particular range and precision
     public ShoppingCart withTaxRate(BigDecimal taxRate) {

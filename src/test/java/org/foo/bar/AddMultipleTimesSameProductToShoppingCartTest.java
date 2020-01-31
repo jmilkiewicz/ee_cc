@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
-import static org.foo.bar.TestFixtures.*;
+import static org.foo.bar.TestFixtures.DoveSoap;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @DisplayName("On adding multiple times same products to shopping cart")
