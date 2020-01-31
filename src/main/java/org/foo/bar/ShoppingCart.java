@@ -25,6 +25,6 @@ public class ShoppingCart {
     }
 
     public BigDecimal getTotalPrice() {
-        return null;
+        return BigDecimal.valueOf(quantity).multiply(product.getUnitPrice());
     }
 }
