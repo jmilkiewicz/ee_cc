@@ -21,8 +21,14 @@ public class AddMultipleDifferentProductsToShoppingCartTest {
         assertThat("expected " + 2 + " times" + AxeDeo,
                 shoppingCart.contains(2, DoveSoap), Matchers.is(true));
 
+    }
 
+    @Test
+    public void shouldNotContainProductEvenWhenAddedWithQuantityZero() {
+        ShoppingCart shoppingCart = ShoppingCart.empty().add(0, TestFixtures.DoveSoap);
 
+        assertThat("not expected to contain" +   DoveSoap,
+                shoppingCart.contains(0, DoveSoap), Matchers.is(false));
     }
 
 
