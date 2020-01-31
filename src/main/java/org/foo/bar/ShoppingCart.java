@@ -18,6 +18,6 @@ public class ShoppingCart {
     }
 
     public boolean contains(int quantity, Product product) {
-        return true;
+        return quantity == this.quantity;
     }
 }
