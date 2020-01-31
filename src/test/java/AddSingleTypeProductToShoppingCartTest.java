@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
-@DisplayName("On adding single type products")
+@DisplayName("On adding single type products to shopping cart")
 public class AddSingleTypeProductToShoppingCartTest {
     private final Product doveSoap = new Product("Dove Soap", new BigDecimal("39.99"));
     private final int doveSoapQuantity = 5;
@@ -21,13 +21,13 @@ public class AddSingleTypeProductToShoppingCartTest {
     }
 
     @Test
-    public void shouldCheckIfProductsWereAdded() {
+    public void shouldContainExactlyWhatWasAdded() {
         assertThat("expected " + doveSoapQuantity + " times" + doveSoap,
                 shoppingCart.contains(doveSoapQuantity, doveSoap), Matchers.is(true));
     }
 
     @Test
-    public void shouldNotContainWhenQuantityIsDifferent() {
+    public void shouldNotContainWhenQuantityIsDifferentToWhatWasAdded() {
         int moreThanAdded = doveSoapQuantity + 1;
         assertThat("not expected to have " + moreThanAdded + " times" + doveSoap, shoppingCart.contains(moreThanAdded, doveSoap), Matchers.is(false));
     }
