@@ -8,22 +8,18 @@ import java.util.Map;
 import java.util.Optional;
 
 public class ShoppingCart {
-    private final int quantity;
-    private final Product product;
     private final Optional<BigDecimal> taxRate;
 
     private final Map<Product, Integer> content;
 
 
-    private ShoppingCart(int quantity, Product product, Map<Product, Integer> content, Optional<BigDecimal> taxRate) {
-        this.quantity = quantity;
-        this.product = product;
+    private ShoppingCart(Map<Product, Integer> content, Optional<BigDecimal> taxRate) {
         this.content = content;
         this.taxRate = taxRate;
     }
 
     public static ShoppingCart empty() {
-        return new ShoppingCart(0, null, Collections.emptyMap(), Optional.empty());
+        return new ShoppingCart(Collections.emptyMap(), Optional.empty());
     }
 
     //TODO check for nulls
@@ -36,7 +32,7 @@ public class ShoppingCart {
         Map<Product, Integer> newContent = new HashMap<>(this.content);
         newContent.put(product, currentQuantity + quantity);
 
-        return new ShoppingCart(quantity + this.quantity, product, newContent, this.taxRate);
+        return new ShoppingCart(newContent, this.taxRate);
     }
 
     public boolean contains(int quantity, Product product) {
@@ -49,14 +45,14 @@ public class ShoppingCart {
     }
 
     private BigDecimal itemsValue() {
-        return this.content.entrySet().stream().map(entry-> entry.getKey().getUnitPrice().multiply(BigDecimal.valueOf(entry.getValue())))
+        return this.content.entrySet().stream().map(entry -> entry.getKey().getUnitPrice().multiply(BigDecimal.valueOf(entry.getValue())))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
     //TODO Shall we validate it is in particular range and precision
     public ShoppingCart withTaxRate(BigDecimal taxRate) {
         BigDecimal tax = taxRate.divide(BigDecimal.valueOf(100));
-        return new ShoppingCart(this.quantity, this.product, this.content, Optional.ofNullable(tax));
+        return new ShoppingCart(this.content, Optional.ofNullable(tax));
     }
 
     public BigDecimal getTotalSalesTax() {
